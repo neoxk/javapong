@@ -6,7 +6,17 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Window extends JFrame {
-    public Window() {
+
+    private static Window instance;
+
+    public static Window get() {
+       if (instance == null) {
+           instance = new Window();
+       }
+        return instance;
+    }
+
+    private Window() {
         Container contentPane = this.getContentPane();
 
         contentPane.setLayout(new BorderLayout());
