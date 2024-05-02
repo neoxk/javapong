@@ -1,4 +1,4 @@
-package javapong.view;
+package javapong;
 
 import javapong.Config;
 
@@ -8,12 +8,14 @@ import java.awt.*;
 public class Ball extends JComponent {
     private int pos_x = Config.GAME_VIEW_WIDTH / 2 - Config.BALL_SIZE / 2;
     private int pos_y = Config.GAME_VIEW_HEIGHT / 2 - Config.BALL_SIZE / 2;
-    private int dx = Config.BALL_SPEED;
-    private int dy = Config.BALL_SPEED;
+    private double dx = Config.BALL_SPEED;
+    private double dy = Config.BALL_SPEED;
 
     public Ball() {
         setSize(Config.BALL_SIZE, Config.BALL_SIZE);
+
     }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -33,19 +35,15 @@ public class Ball extends JComponent {
         pos_x += dx;
         pos_y += dy;
 
-        pos_x += dx;
-        pos_y += dy;
+        setLocation(pos_x, pos_y);
+        revalidate();
+    }
 
-        if (pos_x <= 0 || pos_x >= Config.GAME_VIEW_WIDTH - Config.BALL_SIZE) {
-            dx = -dx + (int) (Math.random() * 2) - 1;
-        }
-
-        if (pos_y <= 0 ||
-                pos_y >= Config.GAME_VIEW_HEIGHT - Config.BALL_SIZE
-        ) {
-            dy = -dy + (int) (Math.random() * 2) - 1;
-        }
-
+    public void reset() {
+        pos_x = Config.GAME_VIEW_WIDTH / 2 - Config.BALL_SIZE / 2;
+        pos_y = Config.GAME_VIEW_HEIGHT / 2 - Config.BALL_SIZE / 2;
+        dx = Config.BALL_SPEED;
+        dy = Config.BALL_SPEED;
         setLocation(pos_x, pos_y);
         revalidate();
     }

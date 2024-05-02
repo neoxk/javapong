@@ -1,4 +1,4 @@
-package javapong.view;
+package javapong;
 
 import javapong.Config;
 
@@ -6,8 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 
 class GameDivider extends JComponent {
-    private final int SPACING = 40;
-    private final int NUM_LINES = 10;
+    private final int SPACING = 20;
+    private final int NUM_LINES = 15;
 
     public GameDivider() {
         setSize(20, Config.GAME_VIEW_HEIGHT);

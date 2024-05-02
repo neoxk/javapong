@@ -1,6 +1,4 @@
-package javapong.view;
-
-import javapong.Config;
+package javapong;
 
 import javax.swing.*;
 import java.awt.*;

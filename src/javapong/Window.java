@@ -1,11 +1,7 @@
 package javapong;
 
-import javapong.view.GameView;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class Window extends JFrame {
 
