@@ -7,11 +7,14 @@ import java.awt.*;
 
 public class Window extends JFrame {
     public Window() {
-        setLayout(new BorderLayout());
+        Container contentPane = this.getContentPane();
+
+        contentPane.setLayout(new BorderLayout());
         setSize(Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
         setTitle("Javapong");
 
-        add(BorderLayout.CENTER, new GameView());
+
+        contentPane.add(BorderLayout.CENTER, new GameView());
 
         setVisible(true);
     }
