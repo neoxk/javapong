@@ -1,7 +1,6 @@
 package javapong.view;
 
 import javapong.Config;
-import javapong.model.BallModel;
 import javapong.model.PaddleModel;
 
 import javax.swing.*;
@@ -20,7 +19,7 @@ public class GameView extends JPanel {
         PaddleModel paddle1 = new PaddleModel(Paddle.LEFT);
         PaddleModel paddle2 = new PaddleModel(Paddle.RIGHT);
 
-        BallModel ball = new BallModel();
+        Ball ball = new Ball();
 
        GameDivider gameDivider = new GameDivider();
 
@@ -28,7 +27,7 @@ public class GameView extends JPanel {
 
        add(paddle1.getPaddle());
        add(paddle2.getPaddle());
-       add(ball.getBall());
+       add(ball);
        add(gameDivider);
 
        setVisible(true);
