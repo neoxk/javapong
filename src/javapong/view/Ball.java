@@ -21,8 +21,15 @@ public class Ball extends JComponent {
         g.fillOval(0, 0, Config.BALL_SIZE, Config.BALL_SIZE);
     }
 
+    public void bounceX() {
+        dx = -dx;
+    }
 
-    public void newFrame() {
+    public void bounceY() {
+        dy = -dy;
+    }
+
+    public void move() {
         pos_x += dx;
         pos_y += dy;
 

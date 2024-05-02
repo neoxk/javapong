@@ -48,7 +48,7 @@ public class GameView extends JPanel {
 
          new Thread(() -> {
              while (true) {
-                 ball.newFrame();
+                 ball.move();
                  try {
                      Thread.sleep(20);
                  } catch (InterruptedException e) {
