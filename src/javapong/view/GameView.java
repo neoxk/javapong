@@ -1,7 +1,6 @@
 package javapong.view;
 
 import javapong.Config;
-import javapong.model.PaddleModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,8 +15,8 @@ public class GameView extends JPanel {
        setLayout(null);
        setSize(Config.GAME_VIEW_WIDTH, Config.GAME_VIEW_HEIGHT);
 
-        PaddleModel paddle1 = new PaddleModel(Paddle.LEFT);
-        PaddleModel paddle2 = new PaddleModel(Paddle.RIGHT);
+        Paddle paddle1 = Paddle.get(Paddle.LEFT);
+        Paddle paddle2 = Paddle.get(Paddle.RIGHT);
 
         Ball ball = new Ball();
 
@@ -25,8 +24,8 @@ public class GameView extends JPanel {
 
        gameDivider.setLocation((Config.GAME_VIEW_WIDTH / 2) - (Config.PLAYER_DIVIDER_WIDTH / 2),0 );
 
-       add(paddle1.getPaddle());
-       add(paddle2.getPaddle());
+       add(paddle1);
+       add(paddle2);
        add(ball);
        add(gameDivider);
 
@@ -63,26 +62,3 @@ public class GameView extends JPanel {
 
 }
 
-class GameDivider extends JComponent {
-    private final int SPACING = 40;
-    private final int NUM_LINES = 10;
-
-    public GameDivider() {
-        setSize(20, Config.GAME_VIEW_HEIGHT);
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.setColor(Color.decode(Config.PLAYER_DIVIDER_COLOR));
-
-        int line_height = (Config.GAME_VIEW_HEIGHT - ((NUM_LINES - 1) * SPACING)) / NUM_LINES;
-
-        int y_pointer = 0;
-        for (int i = 0; i < NUM_LINES; i++) {
-            g.fillRect(0, y_pointer, Config.PLAYER_DIVIDER_WIDTH, line_height);
-            y_pointer += line_height + SPACING;
-        }
-
-    }
-}
