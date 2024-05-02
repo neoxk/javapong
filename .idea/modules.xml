@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/javapong.iml" filepath="$PROJECT_DIR$/.idea/javapong.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javapong.iml" filepath="$PROJECT_DIR$/javapong.iml" />
     </modules>
   </component>
 </project>
