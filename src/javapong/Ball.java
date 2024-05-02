@@ -8,12 +8,13 @@ import java.awt.*;
 public class Ball extends JComponent {
     private int pos_x = Config.GAME_VIEW_WIDTH / 2 - Config.BALL_SIZE / 2;
     private int pos_y = Config.GAME_VIEW_HEIGHT / 2 - Config.BALL_SIZE / 2;
-    private double dx = Config.BALL_SPEED;
-    private double dy = Config.BALL_SPEED;
+    private double dx;
+    private double dy;
 
     public Ball() {
         setSize(Config.BALL_SIZE, Config.BALL_SIZE);
-
+        dx = Math.random() * 2 - 1;
+        dy = Math.sqrt(Math.pow(Config.BALL_SPEED, 2) - Math.pow(dx, 2));
     }
 
     @Override
@@ -25,10 +26,12 @@ public class Ball extends JComponent {
 
     public void bounceX() {
         dx = -dx;
+        dy = dy + Math.random() * 0.01 - 0.005;
     }
 
     public void bounceY() {
         dy = -dy;
+        dx = dx + Math.random() * 0.01 - 0.005;
     }
 
     public void move() {
