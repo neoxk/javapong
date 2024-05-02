@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class Javapong {
     public static void main(String[] args) {
-        Window window = Window.get();
+        Window window = new Window();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

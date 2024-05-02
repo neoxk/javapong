@@ -1,33 +1,65 @@
 package javapong.view;
 
 import javapong.Config;
+import javapong.model.BallModel;
+import javapong.model.PaddleModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class GameView extends JPanel {
 
 
-    public GameView() {
+    public GameView(JFrame window) {
        setBackground(Color.BLACK);
        setLayout(null);
        setSize(Config.GAME_VIEW_WIDTH, Config.GAME_VIEW_HEIGHT);
 
-       Paddle paddle1 = new Paddle(Color.decode(Config.P1_PADDLE_COLOR), 10);
-       Paddle paddle2 = new Paddle(Color.decode(Config.P2_PADDLE_COLOR), Config.GAME_VIEW_WIDTH - Config.PADDLE_WIDTH - 10);
+        PaddleModel paddle1 = new PaddleModel(Paddle.LEFT);
+        PaddleModel paddle2 = new PaddleModel(Paddle.RIGHT);
+
+        BallModel ball = new BallModel();
 
        GameDivider gameDivider = new GameDivider();
 
-       paddle1.setLocation(paddle1.getLocation());
-       paddle2.setLocation(paddle2.getLocation());
-
        gameDivider.setLocation((Config.GAME_VIEW_WIDTH / 2) - (Config.PLAYER_DIVIDER_WIDTH / 2),0 );
 
-       add(paddle1);
-       add(paddle2);
+       add(paddle1.getPaddle());
+       add(paddle2.getPaddle());
+       add(ball.getBall());
        add(gameDivider);
 
-        setVisible(true);
+       setVisible(true);
+
+         window.addKeyListener(new KeyAdapter() {
+              @Override
+              public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_W) {
+                     paddle1.moveUp();
+                } else if (e.getKeyCode() == KeyEvent.VK_S) {
+                     paddle1.moveDown();
+                } else if (e.getKeyCode() == KeyEvent.VK_UP) {
+                     paddle2.moveUp();
+                } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                     paddle2.moveDown();
+                }
+              }
+         });
+
+         new Thread(() -> {
+             while (true) {
+                 ball.newFrame();
+                 try {
+                     Thread.sleep(20);
+                 } catch (InterruptedException e) {
+                     e.printStackTrace();
+                 }
+             }
+         }).start();
+
+
     }
 
 }

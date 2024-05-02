@@ -4,19 +4,12 @@ import javapong.view.GameView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Window extends JFrame {
 
-    private static Window instance;
-
-    public static Window get() {
-       if (instance == null) {
-           instance = new Window();
-       }
-        return instance;
-    }
-
-    private Window() {
+    public Window() {
         Container contentPane = this.getContentPane();
 
         contentPane.setLayout(new BorderLayout());
@@ -24,8 +17,10 @@ public class Window extends JFrame {
         setTitle("Javapong");
 
 
-        contentPane.add(BorderLayout.CENTER, new GameView());
+        contentPane.add(BorderLayout.CENTER, new GameView(this));
 
         setVisible(true);
+
+
     }
 }

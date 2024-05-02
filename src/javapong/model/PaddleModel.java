@@ -1,46 +1,47 @@
 package javapong.model;
 
-import javapong.Window;
+import javapong.Config;
 import javapong.view.Paddle;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.*;
 
 public class PaddleModel {
-    private int pos_y;
+    private Paddle paddle;
     private int pos_x;
-    private Paddle view;
+    private int pos_y;
 
-    public PaddleModel(int pos_x, Paddle view) {
-        pos_y = 10;
-        this.pos_x = pos_x;
-        this.view = view;
+    public PaddleModel(int placement) {
+        this.paddle = new Paddle();
 
-        Window.get().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyChar() == 'w') pos_y -= 10;
-                if (e.getKeyChar() == 's') pos_y += 10;
-                System.out.println(e.getKeyChar());
-            }
-        });
+       if (placement == Paddle.LEFT) {
+           paddle.setColor(Color.decode(Config.P1_PADDLE_COLOR));
+           pos_x = 10;
+           pos_y = 10;
+           paddle.moveTo(pos_x, pos_y);
+       } else if (placement == Paddle.RIGHT) {
+           paddle.setColor(Color.decode(Config.P2_PADDLE_COLOR));
+           pos_x = Config.GAME_VIEW_WIDTH - Config.PADDLE_WIDTH - 10;
+           pos_y = 10;
+           paddle.moveTo(pos_x, pos_y);
+       }
     }
 
-    public void set_y(int y) {
-        pos_y = y;
-        view.modelChanged();
+    public Paddle getPaddle() {
+        return paddle;
     }
 
-    public int get_x() {
-        return pos_x;
+    public void moveDown() {
+        if (pos_y >= Config.GAME_VIEW_HEIGHT - Config.PADDLE_HEIGHT) return;
+
+        pos_y = pos_y + Config.PADDLE_SPEED;
+        paddle.moveTo(pos_x, pos_y);
     }
 
-    public int get_y() {
-        return pos_y;
+    public void moveUp() {
+        if (pos_y <= 0) return;
+
+        pos_y = pos_y - Config.PADDLE_SPEED;
+        paddle.moveTo(pos_x, pos_y);
     }
-
-
-
-
 
 }

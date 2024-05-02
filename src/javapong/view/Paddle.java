@@ -1,32 +1,33 @@
 package javapong.view;
 
 import javapong.Config;
-import javapong.model.PaddleModel;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class Paddle extends JComponent {
     private Color color;
-    private PaddleModel model;
+    public static final int LEFT = 0;
+    public static final int RIGHT = 1;
 
-    public Paddle(Color color, int pos_x) {
-        model = new PaddleModel(pos_x, this);
+    public Paddle() {
         setSize(Config.PADDLE_WIDTH, Config.PADDLE_HEIGHT);
-        this.color = color;
     }
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(color);
-        g.fillRect(0, model.get_y(), Config.PADDLE_WIDTH, Config.PADDLE_HEIGHT);
+        g.fillRect(0, 0, Config.PADDLE_WIDTH, Config.PADDLE_HEIGHT);
     }
 
-    public void modelChanged() {
+    public void moveTo(int x, int y) {
+        setLocation(x, y);
+        revalidate();
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
         repaint();
     }
 
-    public Point getLocation() {
-        return new Point(model.get_x(), model.get_y());
-    }
 }
